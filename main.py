@@ -44,6 +44,10 @@ def create_access_token(data: dict, expires_delta: timedelta):
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
+@app.get("/")
+def root():
+    return {"message": "FastAPI Docker app running on Vercel!"}
+
 @app.post("/login", response_model=TokenResponse)
 def login(request: LoginRequest):
     email = request.email
